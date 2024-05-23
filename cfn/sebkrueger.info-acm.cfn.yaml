@@ -1,0 +1,22 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: "Certificate for flyttness.com"
+
+Mappings:
+  DnsMap:
+    HostedZone:
+      Name: 'sebkrueger.info'
+      Id: Z0326927MQCUOO2NQ215 # sebkrueger.info
+
+Resources:
+  Certificate:
+    Type: "AWS::CertificateManager::Certificate"
+    Properties:
+      DomainName: !FindInMap [DnsMap, HostedZone, Name]
+      DomainValidationOptions:
+        - DomainName: !FindInMap [DnsMap, HostedZone, Name]
+          HostedZoneId: !FindInMap [DnsMap, HostedZone, Id]
+      SubjectAlternativeNames:
+        - !Sub
+          - "*.${DomainName}"
+          - DomainName: !FindInMap [DnsMap, HostedZone, Name]
+      ValidationMethod: DNS

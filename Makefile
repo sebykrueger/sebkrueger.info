@@ -1,64 +1,14 @@
 # ------------------------------------------------------------------------
-# Example AWS CDK Targets
+# DNS Updates
 # ------------------------------------------------------------------------
 
-# Create a new CDK app in Typescript
-new-cdk-app-typescript: ## Create a new typescript-based CDK app
-	@./scripts/banner.sh
-	@echo -e "[${GREEN}INFO${NC}] - Create a new CDK app in Typescript"
-	@mkdir cdk && cd cdk && cdk init app --language typescript
+sebkrueger-info-to-linkedin-redirect: ## Redirect sebkrueger.info to linkedin
+	@echo -e "[${GREEN}INFO${NC}] - Redirect sebkrueger.info to linkedin"
+	@rain deploy --region us-east-1 ./cfn/sebkrueger.info-redirect-us-east-1.cfn.yaml
 
-# Deploying stacks with the CDK requires special dedicated AWS CDK resources 
-# to be provisioned. The cdk bootstrap command creates the necessary resources 
-# for you.
-bootstrap: ## Bootstrap CDK stack
-	@./scripts/banner.sh
-	@echo -e "[${GREEN}INFO${NC}] - Bootstrap CDK stack"
-	@cd cdk && cdk bootstrap
-
-# To see a list of the IDs of the stacks in your AWS CDK application
-list: ## List CDK stack
-	@./scripts/banner.sh
-	@echo -e "[${GREEN}INFO${NC}] - List CDK stack"
-	@cd cdk && cdk list
-
-# Synthesizes a stack defined in your app into a CloudFormation template
-synth: ## Synth CDK stack
-	@./scripts/banner.sh
-	@echo -e "[${GREEN}INFO${NC}] - Synth CDK stack"
-	@cd cdk && cdk synth
-
-# Deploys stack to your AWS account
-deploy-no-approval-rollback: ## Deploy CDK stack without approval and rollback
-	@./scripts/banner.sh
-	@echo -e "[${GREEN}INFO${NC}] - Deploy CDK stack without approval"
-	@cd cdk && cdk deploy --no-rollback --require-approval never
-
-deploy-no-rollback: ## Deploy CDK stack with approval and without rollback
-	@./scripts/banner.sh
-	@echo -e "[${GREEN}INFO${NC}] - Deploy CDK stack"
-	@cd cdk && cdk deploy --no-rollback
-
-deploy: ## Deploy CDK stack with approval and rollback
-	@./scripts/banner.sh
-	@echo -e "[${GREEN}INFO${NC}] - Deploy CDK stack"
-	@cd cdk && cdk deploy
-
-# Compares the current version of a stack (and its dependencies) defined in your app 
-# with the already-deployed versions
-diff: ## Diff CDK stack
-	@./scripts/banner.sh
-	@echo -e "[${GREEN}INFO${NC}] - Deploy CDK stack"
-	@cd cdk && cdk diff
-
-# ------------------------------------------------------------------------
-# Example CloudFormation Targets
-# ------------------------------------------------------------------------
-
-sample-cfn-deployment-target: ## Target title
-	@./scripts/banner.sh
-	@echo -e "[${GREEN}INFO${NC}] - Target title"
-	@rain deploy --region us-east-1 ./example.cfn.yml
+sebkrueger-info-acm: ## Create ACM certs for sebkrueger.info
+	@echo -e "[${GREEN}INFO${NC}] - Create ACM certs for sebkrueger.info"
+	@rain deploy --region us-east-1 ./cfn/sebkrueger.info-acm.cfn.yaml
 
 # ------------------------------------------------------------------------
 # General Targets
@@ -66,7 +16,6 @@ sample-cfn-deployment-target: ## Target title
 
 # https://postd.cc/auto-documented-makefile/
 help: ## Show help
-	@./scripts/banner.sh
 	@echo 'Usage: make [target]'
 	@echo ''
 	@echo 'Targets:'
