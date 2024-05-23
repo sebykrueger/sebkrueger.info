@@ -8,7 +8,7 @@ Mappings:
       Id: Z0326927MQCUOO2NQ215 # sebkrueger.info
   RedirectMap:
     Destination:
-      URL: 'www.linkedin.com/in/sebastiankrueger/'
+      URL: 'www.linkedin.com/in/sebastiankrueger'
   SecurityMap:
     Certificate:
       ARN: arn:aws:acm:us-east-1:885890946361:certificate/048bf7ea-e462-4d40-b691-4b1ce40aa0cf
